@@ -659,6 +659,10 @@ void System::SaveKeyFrameTrajectoryTUM(const string &filename)
     f.close();
 }
 
+vector<MapPoint*> System::GetAllMapPoints() {
+    return mpAtlas->GetAllMapPoints();
+}
+
 void System::SaveTrajectoryEuRoC(const string &filename)
 {
 
