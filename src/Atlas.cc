@@ -191,13 +191,25 @@ long unsigned Atlas::KeyFramesInMap()
 std::vector<KeyFrame*> Atlas::GetAllKeyFrames()
 {
     std::unique_lock<std::mutex> lock(mMutexAtlas);
-    return mpCurrentMap->GetAllKeyFrames();
+    std::vector<KeyFrame*> vpKFs;
+    for(Map* pMap_i : mspMaps)
+    {
+        std::vector<KeyFrame*> vpKFs_Mi = pMap_i->GetAllKeyFrames();
+        vpKFs.insert(vpKFs.end(), vpKFs_Mi.begin(), vpKFs_Mi.end());
+    }
+    return vpKFs;
 }
 
 std::vector<MapPoint*> Atlas::GetAllMapPoints()
 {
     std::unique_lock<std::mutex> lock(mMutexAtlas);
-    return mpCurrentMap->GetAllMapPoints();
+    std::vector<MapPoint*> vpMPs;
+    for(Map* pMap_i : mspMaps)
+    {
+        std::vector<MapPoint*> vpMPs_Mi = pMap_i->GetAllMapPoints();
+        vpMPs.insert(vpMPs.end(), vpMPs_Mi.begin(), vpMPs_Mi.end());
+    }
+    return vpMPs;
 }
 
 std::vector<MapPoint*> Atlas::GetReferenceMapPoints()

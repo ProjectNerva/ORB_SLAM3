@@ -3867,7 +3867,7 @@ void Tracking::ResetActiveMap(bool bLocMap)
     Verbose::PrintMess("done", Verbose::VERBOSITY_NORMAL);
 
     // Clear Map (this erase MapPoints and KeyFrames)
-    mpAtlas->clearMap();
+    mpAtlas->CreateNewMap();
 
 
     //KeyFrame::nNextId = mpAtlas->GetLastInitKFid();
